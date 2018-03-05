@@ -17,6 +17,7 @@ set(SOURCES
     chacha20poly1305/chacha20poly1305.c chacha20poly1305/chacha_merged.c chacha20poly1305/poly1305-donna.c chacha20poly1305/rfc7539.c
     rc4.c
     nem.c
+    memzero.c
 )
 
 add_library(TrezorCrypto STATIC ${SOURCES})
@@ -31,6 +32,9 @@ target_compile_options(TrezorCrypto PRIVATE "-std=c99")
 if(MSVC)
   set_source_files_properties(${SOURCES} PROPERTIES LANGUAGE CXX)
 endif(MSVC)
+
+add_executable(test_bip39 test_bip39.c)
+target_link_libraries(test_bip39 TrezorCrypto)
 
 # Build trezor-crypto tests (requires OpenSSL)
 if (TREZOR_CRYPTO_TESTS)
