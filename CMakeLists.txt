@@ -33,8 +33,12 @@ if(MSVC)
   set_source_files_properties(${SOURCES} PROPERTIES LANGUAGE CXX)
 endif(MSVC)
 
+
+INCLUDE_DIRECTORIES(/usr/local/include)
+LINK_DIRECTORIES(/usr/local/lib)
 add_executable(test_bip39 test_bip39.c)
-target_link_libraries(test_bip39 TrezorCrypto)
+target_link_libraries(test_bip39 TrezorCrypto sodium)
+
 
 # Build trezor-crypto tests (requires OpenSSL)
 if (TREZOR_CRYPTO_TESTS)
